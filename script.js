@@ -28,7 +28,6 @@ window.songChanger = function(song) { //why window? https://stackoverflow.com/qu
     isPlaying = !isPlaying; 
     playPause();
 };
-console.log(songs, 'aaaaaaaaaaaa');
 
 window.playPause = function() {
     if (!isPlaying) { //if NOT playing
@@ -91,6 +90,13 @@ btnContainer.addEventListener('click', function(e){
     if (e.target.id === 'prev') prevSong();
     if (e.target.id === 'play') playPause();
     if (e.target.id === 'next') nextSong();
+});
+
+//keboard event listener/arrow keys event listener i have to use "keydown"
+document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowLeft') prevSong();
+    if (e.key === ' ' || e.key === 'Enter' ) playPause();
+    if (e.key === 'ArrowRight') nextSong();
 });
 
 //get the total track duration and display it; NOTE: used this logic to compute total duration just once
