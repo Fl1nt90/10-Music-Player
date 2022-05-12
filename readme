@@ -8,4 +8,5 @@ Personalization and Improvements:
 >Playback state maintains when skipping tracks;
 >Event Delegation for track controls (to reduce the number of event handlers);
 >Matching strategy to avoid click on unwanted area of the progress-container;
+>Fix and improvements of responsive design;
 >Small performances and UI tweak;

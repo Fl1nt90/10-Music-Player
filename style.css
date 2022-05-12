@@ -28,7 +28,8 @@ body {
   width: 300px;
   position: relative;
   top: -25px; /*  RELATIVE TO THE CONTAINER (player-container in this case) */
-  left: 50px;
+  left: 50%; /* Center an Item */
+  transform: translateX(-50%);
 }
 .img-container > img { /* Target the image inside the image container */
   width:100%;
@@ -80,16 +81,18 @@ h3 {
 /* Controls */
 .player-controls {
   position: relative;
-  top: -15px;
-  left: 120px;
+  top: -20px;
+  left: 50%;  /* Center an Item */
+  transform: translateX(-50%);
   width: 200px;
+  text-align: center;
   user-select: none; /* prevent selection/prevent user selection/not selectable */
 }
 
 .fas {
   font-size: 30px;
   color: rgb(129, 129, 129);
-  margin-right: 30px;
+  padding: 3% 6% 0 6%;
   cursor: pointer;
 }
 .fas:hover {
@@ -102,27 +105,78 @@ h3 {
   top: 3px;
 }
 
+
+
+
+
 /* Media Query: iPhone (Vertical) */
 @media screen and (max-width: 400px) {
   .player-container{
-    width: 95vw; /* 95% of the Viewport */
-    /* HEIGHT WILL REMAIN THE SAME */
+    height: 90vh; /* 95% of the Viewport */
+    width: 90vw; /* 95% of the Viewport */
   }
 
   .img-container {
-    left: 29px;
+    height: 55%;
+    width: 70%;
+    top: -7px; /*  RELATIVE TO THE CONTAINER (player-container in this case) */
+  }
+
+  .player-controls {
+    top: -10px;
   }
 
   h2 {
+    margin-top: 10px;
     font-size: 20px;
   }
 
   h3 {
     font-size: 15px;
   }
+}
 
+
+@media screen and (max-height: 500px) {
+  .player-container {
+    height: 90vh; /* 95% of the Viewport */
+  }
+
+  .img-container {
+    height: 50vh; 
+    top: -10px; /*  RELATIVE TO THE CONTAINER (player-container in this case) */
+  }
+
+  .progress-container {
+    margin: 15px auto;
+    width: 70%;
+  }
   .player-controls {
     top: -10px;
-    left: 100px;
   }
+}
+
+@media screen and (max-height: 330px) {
+  .img-container {
+    height: 40vh; 
+    top: 5px; /*  RELATIVE TO THE CONTAINER (player-container in this case) */
+  }
+
+
+  h2 {
+    margin-top: 13px;
+    font-size: 18px;
+  }
+
+  h3 {
+    font-size: 13px;
+    margin-top: 0px;
+  }
+  
+.fas {
+  font-size: 25px;
+}
+.main-button {
+  font-size: 35px;
+}
 }
