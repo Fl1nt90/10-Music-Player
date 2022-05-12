@@ -83,6 +83,7 @@ h3 {
   top: -15px;
   left: 120px;
   width: 200px;
+  user-select: none; /* prevent selection/prevent user selection/not selectable */
 }
 
 .fas {
@@ -90,7 +91,6 @@ h3 {
   color: rgb(129, 129, 129);
   margin-right: 30px;
   cursor: pointer;
-  user-select: none; /* prevent selection/prevent user selection/not selectable */
 }
 .fas:hover {
   filter: brightness(80%);
