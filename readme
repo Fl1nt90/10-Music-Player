@@ -1,12 +1,13 @@
-Project based on learning uDemy course: https://jacintodesign.github.io/music-player/
+Project based on learning uDemy course: [!(https://jacintodesign.github.io/music-player/)]
 
-Personalization and Improvements:
->Custom tracks (including one i produced, just for fun);
->Tracks data are stored into an external module (songList.js);
->Added playback controls with keyboard (space/enter and arrow keys);
->Automatic play when user select a point in the progress bar;
->Playback state maintains when skipping tracks;
->Event Delegation for track controls (to reduce the number of event handlers);
->Matching strategy to avoid click on unwanted area of the progress-container;
->Fix and improvements of responsive design;
->Small performances and UI tweak;
+# Personalization and Improvements: 📋
+⚡️Custom tracks (including one i produced, just for fun);
+⚡️Tracks data are stored into an external module (songList.js);
+⚡️Added playback controls with keyboard (space/enter and arrow keys);
+⚡️Automatic play when user select a point in the progress bar;
+⚡️Playback state maintains when skipping tracks;
+⚡️Event Delegation for track controls (to reduce the number of event handlers);
+⚡️Matching strategy to avoid click on unwanted area of the progress-container;
+⚡️Fix and improvements of responsive design;
+⚡️Small performances and UI tweak;
+⚡️Continuous deployment with Netlify;

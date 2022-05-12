@@ -16,8 +16,9 @@ body {
 }
 
 .player-container {
-  height: 500px; /* with this dimension, will fit every smartphone without need of mediaquery */
-  width: 400px; 
+  height: 80vh; 
+  max-height: 500px;
+  width: 400px;
   background-color: #f1f1f1; /* slightly lighter than the backgroud color */
   border-radius: 20px;
   box-shadow: 0 15px 30px 5px  rgba(25, 1, 1, 0.3); /* Horizontal Offset/Vertical Offest/Blur/Spread */
@@ -110,10 +111,10 @@ h3 {
 
 
 /* Media Query: iPhone (Vertical) */
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 415px) {
   .player-container{
-    height: 90vh; /* 95% of the Viewport */
-    width: 90vw; /* 95% of the Viewport */
+    height: 80vh; 
+    width: 90vw; 
   }
 
   .img-container {
@@ -137,7 +138,7 @@ h3 {
 }
 
 
-@media screen and (max-height: 500px) {
+@media screen and (max-height: 600px) {
   .player-container {
     height: 90vh; /* 95% of the Viewport */
   }

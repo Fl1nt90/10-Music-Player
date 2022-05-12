@@ -112,6 +112,4 @@ track.addEventListener('timeupdate', progressUpdate);
 domProgressContainer.addEventListener('click', function(e) {
     if (e.target.id === 'duration-wrapper') return; //allow click only on the progress bar
     setProgressBar(e);
-})
-
-
+});
