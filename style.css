@@ -38,6 +38,7 @@ body {
   object-fit: cover;
   border-radius: 20px;
   box-shadow: 0 5px 30px 5px  rgba(25, 1, 1, 0.5); /* Horizontal Offset/Vertical Offest/Blur/Spread */
+  user-select: none;
 }
 
 
@@ -77,6 +78,7 @@ h3 {
   top: -25px;
   display: flex;
   justify-content: space-between;
+  user-select: none;
 }
 
 /* Controls */
@@ -162,7 +164,6 @@ h3 {
     height: 40vh; 
     top: 5px; /*  RELATIVE TO THE CONTAINER (player-container in this case) */
   }
-
 
   h2 {
     margin-top: 13px;
