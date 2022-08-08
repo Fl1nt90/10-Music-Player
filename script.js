@@ -29,7 +29,7 @@ let volume = 0.7; //initial volume
 track.volume = volume;
 domVolumeBar.style.height = `${(1-volume) * 100}%`;
 
-//MOBILEEEEEEEEEEEEEEEEEEEEE
+//DETECT IF I AM ON MOBILE DEVICE------------------------------------------------------------------
 let isMobile = (function() {
   try{ document.createEvent("TouchEvent"); return true; }
   catch(e){ return false; }
@@ -106,21 +106,33 @@ window.setProgressBar = function(e) {
 
 //VOLUME------------------------------------------------------------------------------------------
 window.setVolumeBar = function(e) {
+    if (isMuted) toggleVolume(); //unmute wehn clicking on the volume bar (if is muted)
+    domVolumeBar.style.transition = 'height 0.1s linear'; //restore in case was removed
+
     const volumeBarHeight = e.srcElement.clientHeight; //get the volume bar height
     const offsetY = e.offsetY; //the point of the volume bar where i clicked
     volume = 1-1/(volumeBarHeight/offsetY); //compute
-    if (volume > 1) volume = 1;
-    // if (volume === 0) toggleVolume();
+    if (volume > 0.97) { //TEMPORARY
+        domVolumeBar.style.transition = 'none';
+        volume = 1;
+    };
+    if (volume < 0.02) { //TEMPORARY
+        domVolumeBar.style.transition = 'none';
+        volume = 0;
+        toggleVolume(); 
+    };
     track.volume = volume; //set the volume on the track
+
     //visual response
     domVolumeBar.style.height = `${(1-volume) * 100}%`;
 };
 
-window.toggleVolume = function(e) {
+window.toggleVolume = function() {
     volumeIcon.classList.toggle('fa-volume-up'); //change the icon
     volumeIcon.classList.toggle('fa-volume-mute');
     isMuted = !isMuted;
     track.muted = isMuted;
+
     if (isMuted) {
         domVolumeBar.style.height = `100%`; //100% means clear the volume bar
         domVolumeBar.style.borderRadius = '5px';
@@ -130,6 +142,7 @@ window.toggleVolume = function(e) {
         domVolumeBar.style.borderRadius = null; //remove property/remove css property
     }
 };
+
 
 
 
@@ -166,14 +179,13 @@ domProgressContainer.addEventListener('click', function(e) {
 //volume bar event handler
 domVolumeOverlay.addEventListener('click', function(e) {
     setVolumeBar(e);
-    if (isMuted) toggleVolume(); //unmute wehn clicking on the volume bar (if is muted)
 });
 //mute/unmute clicking on the volume icon
 volumeIcon.addEventListener('click', function() {
-    if(!isMobile) toggleVolume();
-    if(isMobile) {
-        if(!domVolumeBarContainer.hidden) toggleVolume()
-        domVolumeBarContainer.hidden = false;
+    if(!isMobile) toggleVolume(); //only if we are not on mobile devices
+    if(isMobile) { //ON MOBILE, i want a different click behaviour on volume icon 
+        if(!domVolumeBarContainer.hidden) toggleVolume(); //mute only if the bar is already open
+        domVolumeBarContainer.hidden = false; //else, if is the first click, open the volume bar
     };
 });
 
@@ -190,4 +202,4 @@ domVolumeOverlay.addEventListener('mouseout', function() {
 window.addEventListener('click', function(e) { //to close volume bar clicking elsewhere
     if (e.target.classList.contains(`fa-volume`) || e.target.classList.contains(`volume-overlay`)) return;
     domVolumeBarContainer.hidden = true;
-})
+});
