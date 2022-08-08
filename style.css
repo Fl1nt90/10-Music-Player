@@ -30,8 +30,8 @@ body {
 }
 
 .img-container {
-  height: 300px;
-  width: 300px;
+  height: 60%;
+  width: 75%;
   position: relative;
   top: -25px; /*  RELATIVE TO THE CONTAINER (player-container in this case) */
   left: 50%; /* Center an Item */
@@ -116,6 +116,48 @@ h3 {
 
 
 
+/* VOLUME */
+.volume-container {
+    height: 80%; 
+    width: 10px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: -10%;
+    top: 30px;
+    margin-top: 5px;
+    align-items: center;
+}
+
+.volume-bar-container{
+  height: inherit;
+  width: inherit;
+  background: #242323;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+} 
+.volume-overlay { /* create an overlay to control volume */
+  position: absolute;
+  width: 50px;
+  height: inherit;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.volume-bar {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background: #fff;
+  width: inherit;
+  transition: height 0.1s linear;
+}
+.fa-volume{
+  margin-bottom: 10px;
+}
+
+
+
+
 
 /* Media Query: iPhone (Vertical) */
 @media screen and (max-width: 415px) {
@@ -124,10 +166,11 @@ h3 {
     width: 90vw; 
   }
 
-  .img-container {
-    height: 55%;
-    width: 70%;
-    top: -7px; /*  RELATIVE TO THE CONTAINER (player-container in this case) */
+  .volume-container {
+      width: 8px;
+  }
+  .volume-overlay {
+      width: 30px;
   }
 
   .player-controls {
@@ -144,6 +187,12 @@ h3 {
   }
 }
 
+@media screen and (max-width: 330px) {
+  .fa-volume {
+    font-size: 16px;
+  }
+  }
+
 
 @media screen and (max-height: 600px) {
   .player-container {
@@ -151,8 +200,15 @@ h3 {
   }
 
   .img-container {
-    height: 50vh; 
     top: -10px; /*  RELATIVE TO THE CONTAINER (player-container in this case) */
+  }
+
+  .volume-container {
+    top: 10px;
+  }
+
+  .fa-volume {
+    margin-top: 10px;
   }
 
   .progress-container {
@@ -164,12 +220,15 @@ h3 {
   }
 }
 
+
 @media screen and (max-height: 330px) {
   .img-container {
     height: 40vh; 
     top: 5px; /*  RELATIVE TO THE CONTAINER (player-container in this case) */
   }
-
+  .fa-volume {
+    margin-top: 0px;
+  }
   h2 {
     margin-top: 13px;
     font-size: 18px;
@@ -186,4 +245,23 @@ h3 {
 .main-button {
   font-size: 35px;
 }
+}
+
+/* tablet */
+@media only screen and (min-width: 750px ) and (min-height: 850px ) {
+.player-container{
+    height: 50vh;
+    max-height: 700px;
+    width: 61vw;
+}
+
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 25px;
+  }
+.progress-container {
+    font-size: 20px;
+  }
 }

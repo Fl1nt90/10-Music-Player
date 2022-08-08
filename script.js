@@ -8,14 +8,26 @@ const domProgressBar = document.getElementById('progress-bar');
 const domDuration = document.getElementById('total-duration');
 const domCurrentTime = document.getElementById('current-time');
 
+const domVolumeBarContainer = document.getElementById('volume-bar-container');
+const domVolumeOverlay = document.getElementById('volume-overlay');
+const domVolumeBar = document.getElementById('volume-bar');
+const volumeIcon = document.querySelector('.fa-volume-up');
+
 const coverimage = document.querySelector('img');
 const title = document.getElementById('title');
 const artist = document.getElementById('artist');
+
 
 let duration;
 let isPlaying = false;
 let currentSong = 0;
 
+let isMuted = false;
+let volume = 0.7; //initial volume
+
+//set the volume at runtime (only possible with JS)
+track.volume = volume;
+domVolumeBar.style.height = `${(1-volume) * 100}%`;
 
 //TRACK CONTROLS-----------------------------------------------------------------------------------
 //Function to replace and display song data
@@ -76,12 +88,42 @@ window.progressUpdate = function(e) {
     domProgressBar.style.width = `${currentTime/duration * 100}%`;
 };
 window.setProgressBar = function(e) {
-    const progressBarwidth = e.srcElement.clientWidth; //get the progress bar width
+    const progressBarwidth = domProgressContainer.clientWidth; //get the progress bar width/get element value/get element property
     const offsetX = e.offsetX; //the point of the progress bar where i clicked
+    console.log(progressBarwidth, offsetX);
     const selectedTime = (offsetX/progressBarwidth) * duration; //compute
     track.currentTime = selectedTime; //set the time on the track using "currentTime" property
     if (!isPlaying) playPause(); //automatic play when user select a point on the progress bar
 }
+
+
+//VOLUME------------------------------------------------------------------------------------------
+window.setVolumeBar = function(e) {
+    const volumeBarHeight = e.srcElement.clientHeight; //get the volume bar height
+    const offsetY = e.offsetY; //the point of the volume bar where i clicked
+    volume = 1-1/(volumeBarHeight/offsetY); //compute
+    if (volume > 1) volume = 1;
+    // if (volume === 0) toggleVolume();
+    track.volume = volume; //set the volume on the track
+    //visual response
+    domVolumeBar.style.height = `${(1-volume) * 100}%`;
+};
+
+window.toggleVolume = function(e) {
+    volumeIcon.classList.toggle('fa-volume-up'); //change the icon
+    volumeIcon.classList.toggle('fa-volume-mute');
+    isMuted = !isMuted;
+    track.muted = isMuted;
+    if (isMuted) {
+        domVolumeBar.style.height = `100%`; //100% means clear the volume bar
+        domVolumeBar.style.borderRadius = '5px';
+    }
+    if (!isMuted) {
+        domVolumeBar.style.height = `${(1-volume) * 100}%`; //restore volume bar level
+        domVolumeBar.style.borderRadius = null; //remove property/remove css property
+    }
+};
+
 
 
 
@@ -113,3 +155,34 @@ domProgressContainer.addEventListener('click', function(e) {
     if (e.target.id === 'duration-wrapper') return; //allow click only on the progress bar
     setProgressBar(e);
 });
+
+//volume bar event handler
+domVolumeOverlay.addEventListener('click', function(e) {
+    setVolumeBar(e);
+    if (isMuted) toggleVolume(); //unmute wehn clicking on the volume bar (if is muted)
+});
+//mute/unmute clicking on the volume icon
+volumeIcon.addEventListener('click', function() {
+    toggleVolume();
+});
+
+//show/hide volume bar on mouse over
+volumeIcon.addEventListener('mouseover', function() {
+    domVolumeBarContainer.hidden = false;
+});
+domVolumeOverlay.addEventListener('mouseout', function() {
+    domVolumeBarContainer.hidden = true;
+})
+window.addEventListener('click', function(e) { //to close volume bar clicking elsewhere
+    if (e.target.classList.contains(`fa-volume`) || e.target.classList.contains(`volume-overlay`)) return;
+    domVolumeBarContainer.hidden = true;
+})
+
+
+
+//MOBILEEEEEEEEEEEEEEEEEEEEE
+const isMobile = (function() {
+  try{ document.createEvent("TouchEvent"); return true; }
+  catch(e){ return false; }
+})();
+
