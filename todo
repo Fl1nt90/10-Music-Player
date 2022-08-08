@@ -2,5 +2,6 @@
 <!-- -controlla barra volume in responsive design (altezza, centrata) -->
 -comportamento quando il volume arriva a 0
 -comportamento barra volume su mobile
+-swipe left/right on mobile
 <!-- -responsive galaxy fold -->
 <!-- -BUG selezione secondi nei primi 10 (una volta che li ha già superati) -->

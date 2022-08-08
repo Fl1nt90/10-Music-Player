@@ -29,6 +29,13 @@ let volume = 0.7; //initial volume
 track.volume = volume;
 domVolumeBar.style.height = `${(1-volume) * 100}%`;
 
+//MOBILEEEEEEEEEEEEEEEEEEEEE
+let isMobile = (function() {
+  try{ document.createEvent("TouchEvent"); return true; }
+  catch(e){ return false; }
+})();
+
+
 //TRACK CONTROLS-----------------------------------------------------------------------------------
 //Function to replace and display song data
 window.songChanger = function(song) { //why window? https://stackoverflow.com/questions/53268248/js-modules-referenceerror-function-is-not-defined
@@ -163,26 +170,24 @@ domVolumeOverlay.addEventListener('click', function(e) {
 });
 //mute/unmute clicking on the volume icon
 volumeIcon.addEventListener('click', function() {
-    toggleVolume();
+    if(!isMobile) toggleVolume();
+    if(isMobile) {
+        if(!domVolumeBarContainer.hidden) toggleVolume()
+        domVolumeBarContainer.hidden = false;
+    };
 });
 
-//show/hide volume bar on mouse over
-volumeIcon.addEventListener('mouseover', function() {
+// show/hide volume bar on mouse over
+if (!isMobile) { //only add this if we are not on mobile devices
+volumeIcon.addEventListener('mouseover', function () {
     domVolumeBarContainer.hidden = false;
 });
 domVolumeOverlay.addEventListener('mouseout', function() {
     domVolumeBarContainer.hidden = true;
 })
+};
+
 window.addEventListener('click', function(e) { //to close volume bar clicking elsewhere
     if (e.target.classList.contains(`fa-volume`) || e.target.classList.contains(`volume-overlay`)) return;
     domVolumeBarContainer.hidden = true;
 })
-
-
-
-//MOBILEEEEEEEEEEEEEEEEEEEEE
-const isMobile = (function() {
-  try{ document.createEvent("TouchEvent"); return true; }
-  catch(e){ return false; }
-})();
-
