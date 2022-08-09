@@ -3,8 +3,9 @@
 <!-- -comportamento barra volume su mobile -->
 <!-- -responsive galaxy fold -->
 <!-- -BUG selezione secondi nei primi 10 (una volta che li ha già superati) -->
+<!-- -comportamento quando il volume arriva a 0 o MAX (SOLVED TEMPORARY) -->
 
--comportamento quando il volume arriva a 0 o MAX (SOLVED TEMPORARY)
 -swipe left/right on mobile
 https://developer.mozilla.org/en-US/docs/Web/API/Touch_events
 https://gosnippets.com/snippets/image-slider-with-multiple-controls-and-mobile-swipe-control-javascript
+good: https://stackoverflow.com/questions/62823062/adding-a-simple-left-right-swipe-gesture

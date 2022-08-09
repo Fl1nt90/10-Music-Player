@@ -1,4 +1,10 @@
 import { songs } from "./songsList.js";
+// import TouchEvent from "./touch.js";
+
+const playerContainer = document.querySelector('.player-container');
+const coverimage = document.querySelector('img');
+const title = document.getElementById('title');
+const artist = document.getElementById('artist');
 
 const track = document.querySelector('audio');
 const btnContainer = document.querySelector('.player-controls'); //to use event delegation
@@ -13,9 +19,7 @@ const domVolumeOverlay = document.getElementById('volume-bar-overlay');
 const domVolumeBar = document.getElementById('volume-bar');
 const volumeIcon = document.querySelector('.fa-volume-up');
 
-const coverimage = document.querySelector('img');
-const title = document.getElementById('title');
-const artist = document.getElementById('artist');
+
 
 
 let duration;
@@ -224,3 +228,40 @@ window.addEventListener('click', function(e) { //to close volume bar clicking el
     domVolumeBarContainer.style.visibility = 'hidden'
 ;
 });
+
+
+
+
+
+
+let touchstartX, touchendX;
+const swipeTol = 50;
+
+playerContainer.addEventListener('touchstart', function (event) {
+    touchstartX = event.changedTouches[0].screenX;
+    // touchstartY = event.changedTouches[0].screenY;
+}, false);
+
+playerContainer.addEventListener('touchend', function (event) {
+    touchendX = event.changedTouches[0].screenX;
+    // touchendY = event.changedTouches[0].screenY;
+    handleGesture();
+}, false);
+
+
+function handleGesture() {
+    if (touchendX + swipeTol < touchstartX ) prevSong();
+    if (touchendX > touchstartX + swipeTol) nextSong();
+
+    // if (touchendY < touchstartY) {
+    //     console.log('Swiped Up');
+    // }
+
+    // if (touchendY > touchstartY) {
+    //     console.log('Swiped Down');
+    // }
+
+    // if (touchendY === touchstartY) {
+    //     console.log('Tap');
+    // }
+};
