@@ -1,7 +1,6 @@
 import { songs } from "./songsList.js";
-// import TouchEvent from "./touch.js";
+import {checkMobile, doubleTapControl} from "./touchControl.js";
 
-const playerContainer = document.querySelector('.player-container');
 const coverimage = document.querySelector('img');
 const title = document.getElementById('title');
 const artist = document.getElementById('artist');
@@ -21,7 +20,6 @@ const volumeIcon = document.querySelector('.fa-volume-up');
 
 
 
-
 let duration;
 let isPlaying = false;
 let currentSong = 0;
@@ -33,36 +31,14 @@ let volume = 0.7; //initial volume
 track.volume = volume;
 domVolumeBar.style.height = `${(1-volume) * 100}%`;
 
-//DETECT IF I AM ON MOBILE DEVICE------------------------------------------------------------------
-// How To Detect Touch Screen Device Using Javascript https://www.learn-codes.net/javascript/how-to-detect-touch-screen-device-using-javascript/
-let isMobile;
 
-window.checkMobile = function() {
-    if (window.matchMedia("(pointer: coarse)").matches) {
-        return true; 
-    } else return false;
 
-    console.log(isMobile);
-
-//     window.addEventListener('touchstart', function mouseMoveDetector() {
-//         isMobile = true;
-//         console.log(isMobile);
-//         window.removeEventListener('touchstart', mouseMoveDetector);
-// });
-
-//   try{ document.createEvent("TouchEvent"); 
-//     return true; }
-//   catch(e){ 
-//     return false; 
-// }};
-};
-console.log();
 
 //TRACK CONTROLS-----------------------------------------------------------------------------------
 //Function to replace and display song data
 window.songChanger = function(song) { //why window? https://stackoverflow.com/questions/53268248/js-modules-referenceerror-function-is-not-defined
-    coverimage.src = `img/${song.name}.jpg`
-    track.src = `music/${song.name}.mp3`;
+    coverimage.src = `src/img/${song.name}.jpg`
+    track.src = `src/music/${song.name}.mp3`;
     title.textContent = song.displayName;
     artist.textContent = song.artist;
 //logic to continue with current playback
@@ -111,7 +87,7 @@ window.progressUpdate = function(e) {
     const {currentTime} = e.srcElement;
     const min = Math.floor(currentTime/60);
     let sec = Math.floor(currentTime%60) //get seconds using the reminder operator
-    sec = (sec > 10) ? sec : `0${sec}` //logic to add a 0 in case of first 10 seconds
+    sec = (sec > 9) ? sec : `0${sec}` //logic to add a 0 in case of first 10 seconds
     //display current time and update the progress bar
     domCurrentTime.textContent = `${min}:${sec}`; //logic to add a 0 in case of first 10 seconds
     domProgressBar.style.width = `${currentTime/duration * 100}%`;
@@ -119,7 +95,6 @@ window.progressUpdate = function(e) {
 window.setProgressBar = function(e) {
     const progressBarwidth = domProgressContainer.clientWidth; //get the progress bar width/get element value/get element property
     const offsetX = e.offsetX; //the point of the progress bar where i clicked
-    console.log(progressBarwidth, offsetX);
     const selectedTime = (offsetX/progressBarwidth) * duration; //compute
     track.currentTime = selectedTime; //set the time on the track using "currentTime" property
     if (!isPlaying) playPause(); //automatic play when user select a point on the progress bar
@@ -225,8 +200,8 @@ domVolumeOverlay.addEventListener('mouseout', function() {
 
 window.addEventListener('click', function(e) { //to close volume bar clicking elsewhere
     if (e.target.classList.contains(`fa-volume`) || e.target.classList.contains(`volume-bar-overlay`)) return;
-    domVolumeBarContainer.style.visibility = 'hidden'
-;
+    domVolumeBarContainer.style.visibility = 'hidden';
+    doubleTapControl(e);
 });
 
 
@@ -234,34 +209,5 @@ window.addEventListener('click', function(e) { //to close volume bar clicking el
 
 
 
-let touchstartX, touchendX;
-const swipeTol = 50;
-
-playerContainer.addEventListener('touchstart', function (event) {
-    touchstartX = event.changedTouches[0].screenX;
-    // touchstartY = event.changedTouches[0].screenY;
-}, false);
-
-playerContainer.addEventListener('touchend', function (event) {
-    touchendX = event.changedTouches[0].screenX;
-    // touchendY = event.changedTouches[0].screenY;
-    handleGesture();
-}, false);
 
 
-function handleGesture() {
-    if (touchendX + swipeTol < touchstartX ) prevSong();
-    if (touchendX > touchstartX + swipeTol) nextSong();
-
-    // if (touchendY < touchstartY) {
-    //     console.log('Swiped Up');
-    // }
-
-    // if (touchendY > touchstartY) {
-    //     console.log('Swiped Down');
-    // }
-
-    // if (touchendY === touchstartY) {
-    //     console.log('Tap');
-    // }
-};

@@ -1,11 +1,14 @@
-<!-- -loop sui diversi eventi dell'icona del volume, opzione per mettere muto -->
+<!-- -mute functionality and icon -->
 <!-- -controlla barra volume in responsive design (altezza, centrata) -->
-<!-- -comportamento barra volume su mobile -->
+<!-- -volume bar behaviour on mobile -->
 <!-- -responsive galaxy fold -->
 <!-- -BUG selezione secondi nei primi 10 (una volta che li ha già superati) -->
+<!--  progress bar visual bug 0:010 seconds (instead of 0:10) -->
 <!-- -comportamento quando il volume arriva a 0 o MAX (SOLVED TEMPORARY) -->
 
--swipe left/right on mobile
+<!-- -swipe left/right on mobile
 https://developer.mozilla.org/en-US/docs/Web/API/Touch_events
 https://gosnippets.com/snippets/image-slider-with-multiple-controls-and-mobile-swipe-control-javascript
-good: https://stackoverflow.com/questions/62823062/adding-a-simple-left-right-swipe-gesture
+good: https://stackoverflow.com/questions/62823062/adding-a-simple-left-right-swipe-gesture -->
+
+<!-- -double tap to play and pause https://stackoverflow.com/questions/65870889/is-there-any-way-to-make-double-click-events-work-in-phones-with-vanilla-javascr -->
