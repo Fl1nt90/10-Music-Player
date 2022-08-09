@@ -117,30 +117,26 @@ h3 {
 
 
 /* VOLUME */
-.volume-container {
-    height: 80%; 
-    width: 10px;
+
+.volume-bar-container{
     position: absolute;
     display: flex;
     flex-direction: column;
-    right: -10%;
-    top: 30px;
     margin-top: 5px;
-    align-items: center;
+    height: 70%;
+    width: 10px;
+    left: 107%;
+    top: 25%;
+    background: #242323;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    visibility: hidden;
 }
-
-.volume-bar-container{
-  height: inherit;
-  width: inherit;
-  background: #242323;
-  border-radius: 5px;
-  cursor: pointer;
-  user-select: none;
-} 
-.volume-overlay { /* create an overlay to control volume */
+.volume-bar-overlay { /* create an overlay to control volume */
   position: absolute;
   width: 50px;
-  height: inherit;
+  height: 100%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -152,7 +148,11 @@ h3 {
   transition: height 0.1s linear;
 }
 .fa-volume{
-  margin-bottom: 10px;
+    position: absolute;
+    align-self: center;
+    top: -20%;
+    padding: 0px;
+    visibility: visible;
 }
 
 
@@ -200,15 +200,12 @@ h3 {
   }
 
   .img-container {
+    height: 55%;
     top: -10px; /*  RELATIVE TO THE CONTAINER (player-container in this case) */
   }
 
   .volume-container {
-    top: 10px;
-  }
-
-  .fa-volume {
-    margin-top: 10px;
+    top: 5px;
   }
 
   .progress-container {
@@ -226,9 +223,7 @@ h3 {
     height: 40vh; 
     top: 5px; /*  RELATIVE TO THE CONTAINER (player-container in this case) */
   }
-  .fa-volume {
-    margin-top: 0px;
-  }
+
   h2 {
     margin-top: 13px;
     font-size: 18px;
@@ -238,7 +233,10 @@ h3 {
     font-size: 13px;
     margin-top: 0px;
   }
-  
+
+.fa-volume {
+  top: -35%;
+}
 .fas {
   font-size: 25px;
 }
@@ -250,7 +248,7 @@ h3 {
 /* tablet */
 @media only screen and (min-width: 750px ) and (min-height: 850px ) {
 .player-container{
-    height: 50vh;
+    height: 55vh;
     max-height: 700px;
     width: 61vw;
 }
@@ -263,5 +261,11 @@ h3 {
   }
 .progress-container {
     font-size: 20px;
+    margin: 30px 20px;
+    height: 6px;
   }
+.duration-wrapper {
+    position: relative;
+    top: -35px;
+}
 }

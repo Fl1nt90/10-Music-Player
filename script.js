@@ -8,8 +8,8 @@ const domProgressBar = document.getElementById('progress-bar');
 const domDuration = document.getElementById('total-duration');
 const domCurrentTime = document.getElementById('current-time');
 
-const domVolumeBarContainer = document.getElementById('volume-bar-container');
-const domVolumeOverlay = document.getElementById('volume-overlay');
+const domVolumeBarContainer = document.querySelector('.volume-bar-container');
+const domVolumeOverlay = document.getElementById('volume-bar-overlay');
 const domVolumeBar = document.getElementById('volume-bar');
 const volumeIcon = document.querySelector('.fa-volume-up');
 
@@ -30,11 +30,29 @@ track.volume = volume;
 domVolumeBar.style.height = `${(1-volume) * 100}%`;
 
 //DETECT IF I AM ON MOBILE DEVICE------------------------------------------------------------------
-let isMobile = (function() {
-  try{ document.createEvent("TouchEvent"); return true; }
-  catch(e){ return false; }
-})();
+// How To Detect Touch Screen Device Using Javascript https://www.learn-codes.net/javascript/how-to-detect-touch-screen-device-using-javascript/
+let isMobile;
 
+window.checkMobile = function() {
+    if (window.matchMedia("(pointer: coarse)").matches) {
+        return true; 
+    } else return false;
+
+    console.log(isMobile);
+
+//     window.addEventListener('touchstart', function mouseMoveDetector() {
+//         isMobile = true;
+//         console.log(isMobile);
+//         window.removeEventListener('touchstart', mouseMoveDetector);
+// });
+
+//   try{ document.createEvent("TouchEvent"); 
+//     return true; }
+//   catch(e){ 
+//     return false; 
+// }};
+};
+console.log();
 
 //TRACK CONTROLS-----------------------------------------------------------------------------------
 //Function to replace and display song data
@@ -176,30 +194,33 @@ domProgressContainer.addEventListener('click', function(e) {
     setProgressBar(e);
 });
 
+
 //volume bar event handler
 domVolumeOverlay.addEventListener('click', function(e) {
     setVolumeBar(e);
 });
 //mute/unmute clicking on the volume icon
 volumeIcon.addEventListener('click', function() {
-    if(!isMobile) toggleVolume(); //only if we are not on mobile devices
-    if(isMobile) { //ON MOBILE, i want a different click behaviour on volume icon 
-        if(!domVolumeBarContainer.hidden) toggleVolume(); //mute only if the bar is already open
-        domVolumeBarContainer.hidden = false; //else, if is the first click, open the volume bar
+    // checkMobile(); //check if i am on a touch device;
+    if(!checkMobile()) toggleVolume(); //only if we are not on mobile devices
+    if(checkMobile()) { //ON MOBILE, i want a different click behaviour on volume icon 
+        if(domVolumeBarContainer.style.visibility === 'visible') toggleVolume(); //mute only if the bar is already open
+        domVolumeBarContainer.style.visibility = 'visible'; //else, if is the first click, open the volume bar
     };
 });
 
 // show/hide volume bar on mouse over
-if (!isMobile) { //only add this if we are not on mobile devices
+//only add this if we are not on mobile devices
 volumeIcon.addEventListener('mouseover', function () {
-    domVolumeBarContainer.hidden = false;
+    if (!checkMobile()) domVolumeBarContainer.style.visibility = 'visible';
 });
 domVolumeOverlay.addEventListener('mouseout', function() {
-    domVolumeBarContainer.hidden = true;
+    if (!checkMobile()) domVolumeBarContainer.style.visibility = 'hidden';
 })
-};
+
 
 window.addEventListener('click', function(e) { //to close volume bar clicking elsewhere
-    if (e.target.classList.contains(`fa-volume`) || e.target.classList.contains(`volume-overlay`)) return;
-    domVolumeBarContainer.hidden = true;
+    if (e.target.classList.contains(`fa-volume`) || e.target.classList.contains(`volume-bar-overlay`)) return;
+    domVolumeBarContainer.style.visibility = 'hidden'
+;
 });

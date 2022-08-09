@@ -2,7 +2,8 @@ Project based on learning uDemy course: [!(https://jacintodesign.github.io/music
 
 # Personalization and Improvements: 📋
 ⚡️Custom tracks (including one i produced, just for fun);
-⚡️Added a pop-up volume bar;
+⚡️Added a on-hover volume bar / mute functionality;
+⚡️Touch interaction detection;
 ⚡️Tracks data are stored into an external module (songList.js);
 ⚡️Added playback controls with keyboard (space/enter and arrow keys);
 ⚡️Automatic play when user select a point in the progress bar;
