@@ -149,7 +149,7 @@ h3 {
 }
 .fa-volume{
     position: absolute;
-    align-self: center;
+    left: -100%;
     top: -20%;
     padding: 0px;
     visibility: visible;
@@ -190,6 +190,8 @@ h3 {
 @media screen and (max-width: 330px) {
   .fa-volume {
     font-size: 16px;
+    left: -40%;
+    top: -15%;
   }
   }
 
