@@ -231,7 +231,7 @@ h3 {
   }
 
 .fa-volume {
-  top: -35%;
+  top: -25%;
 }
 .fas {
   font-size: 25px;
@@ -242,15 +242,18 @@ h3 {
 }
 
 @media screen and (max-width: 330px) {
+  .fa-volume {
+    font-size: 16px;
+    left: -45%;
+    top: -15%;
+  }
+  }
+
+  @media screen and (max-width: 290px) {
   .volume-bar-container{
     left: 104%;
   }
 
-  .fa-volume {
-    font-size: 16px;
-    left: -45%;
-    top: -25%;
-  }
   }
 
 /* tablet */
