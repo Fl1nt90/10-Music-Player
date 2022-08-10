@@ -231,7 +231,7 @@ h3 {
   }
 
 .fa-volume {
-  top: -25%;
+  top: -35%;
 }
 .fas {
   font-size: 25px;
@@ -241,11 +241,11 @@ h3 {
 }
 }
 
-@media screen and (max-width: 330px) {
+@media screen and (max-height: 300px) and (max-width: 330px) {
   .fa-volume {
     font-size: 16px;
     left: -45%;
-    top: -15%;
+    top: -25%;
   }
   }
 
