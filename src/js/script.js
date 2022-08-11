@@ -8,8 +8,8 @@ const artist = document.getElementById('artist');
 const track = document.querySelector('audio');
 const btnContainer = document.querySelector('.player-controls'); //to use event delegation
 const playBtn = document.getElementById('play')
-const domProgressContainer = document.getElementById('progress-container');
 const domProgressBar = document.getElementById('progress-bar');
+const domProgressBarOverlay = document.getElementById('progress-bar-overlay');
 const domDuration = document.getElementById('total-duration');
 const domCurrentTime = document.getElementById('current-time');
 
@@ -93,7 +93,7 @@ window.progressUpdate = function(e) {
     domProgressBar.style.width = `${currentTime/duration * 100}%`;
 };
 window.setProgressBar = function(e) {
-    const progressBarwidth = domProgressContainer.clientWidth; //get the progress bar width/get element value/get element property
+    const progressBarwidth = domProgressBarOverlay.clientWidth; //get the progress bar width/get element value/get element property
     const offsetX = e.offsetX; //the point of the progress bar where i clicked
     const selectedTime = (offsetX/progressBarwidth) * duration; //compute
     track.currentTime = selectedTime; //set the time on the track using "currentTime" property
@@ -168,7 +168,7 @@ track.addEventListener('ended', nextSong);
 //to get the current playback time
 track.addEventListener('timeupdate', progressUpdate);
 //click on the progress bar
-domProgressContainer.addEventListener('click', function(e) {
+domProgressBarOverlay.addEventListener('click', function(e) {
     if (e.target.id === 'duration-wrapper') return; //allow click only on the progress bar
     setProgressBar(e);
 });

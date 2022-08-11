@@ -64,7 +64,6 @@ h3 {
 .progress-container {
   background: #fff;
   border-radius: 5px;
-  cursor: pointer;
   margin: 40px 20px;
   height: 4px;
   width: 90%;
@@ -84,6 +83,14 @@ h3 {
   top: -25px;
   display: flex;
   justify-content: space-between;
+}
+
+.progress-bar-overlay {
+  position: relative;
+  top: -29px;
+  height: 25px;
+  background: transparent;
+  cursor: pointer;
 }
 
 /* Controls */
@@ -278,5 +285,8 @@ h3 {
 .duration-wrapper {
     position: relative;
     top: -35px;
+}
+.progress-bar-overlay {
+  top: -39px;
 }
 }

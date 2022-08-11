@@ -5,6 +5,7 @@
 <!-- -BUG selezione secondi nei primi 10 (una volta che li ha già superati) -->
 <!--  progress bar visual bug 0:010 seconds (instead of 0:10) -->
 <!-- -comportamento quando il volume arriva a 0 o MAX (SOLVED TEMPORARY) -->
+<!-- -bigger progress bar overlay to easy skimming on small screen -->
 
 <!-- -swipe left/right on mobile
 https://developer.mozilla.org/en-US/docs/Web/API/Touch_events
@@ -13,4 +14,3 @@ good: https://stackoverflow.com/questions/62823062/adding-a-simple-left-right-sw
 
 <!-- -double tap to play and pause https://stackoverflow.com/questions/65870889/is-there-any-way-to-make-double-click-events-work-in-phones-with-vanilla-javascr -->
 
--bigger progress bar overlay to easy skimming on small screen
